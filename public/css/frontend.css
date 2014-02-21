@@ -37,6 +37,10 @@ body {
 	margin: 20px 0;
 }
 
-#room {
-	width: 174px;
+li {
+	background-color: #ccc;
 }
+li.active {
+	background-color: #fff;
+}
+
