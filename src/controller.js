@@ -34,7 +34,8 @@ function adminVoteUpdate(params)
     var isAlreadyInTheList = votesEnabled.filter(function(item) {
         return item == params.selectedTeam;
     }).length;
-    if (!isAlreadyInTheList) {
+    console.log('isAlreadyInTheList', isAlreadyInTheList)
+    if (!isAlreadyInTheList && params.selectedTeam) {
         votesEnabled.push(params.selectedTeam);
     }
     _adminPushUpdate(params.selectedTeam);
@@ -110,8 +111,8 @@ function saveData(code, data)
 function loadData(code, callback)
 {
     fs.readFile( '/tmp/' + code + '.json', function(err, data) {
-        console.log('Load file: ', data.toString());
-        var d = data.toString();
+        var d = data ? data.toString() : undefined;
+        console.log('Loaded data: ', d);
         if (d) {
             callback(JSON.parse(d));
         } else {

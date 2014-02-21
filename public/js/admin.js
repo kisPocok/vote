@@ -2,6 +2,9 @@
 var socket = io.connect('http://127.0.0.1:3000');
 $(function()
 {
+    // after load the site, update the list
+    socket.emit('admin.voteUpdate', {});
+
     var app = $('#app');
     app.find('button.golive').click(function()
     {
