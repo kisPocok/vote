@@ -11,7 +11,7 @@ block content
 			ul
 				for team in teams
 					if team != activeUser.team
-						li(class="team #{team}",data-teamname=team)= team
+						li(class="team #{team}",data-teamname=team)= teamNames[team]
 							| &nbsp;
 							each rate, i in ratings
 								div.radio
