@@ -1,6 +1,7 @@
 
 var user = {};
-var socket = io.connect('http://127.0.0.1:3000');
+var host = window.location.protocol + '//' + window.location.hostname;
+var socket = io.connect(host + ':3000');
 var Vote = new (function Voter()
 {
 	var self = this;
