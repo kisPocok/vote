@@ -39,3 +39,8 @@ socket.on('vote.update', function(params) {
     teams.sort();
     $('#enabledTeams').text(teams.toString());
 });
+
+
+socket.on('admin.connectionUpdate', function(params) {
+    $('#connections').text(params.userCount);
+});

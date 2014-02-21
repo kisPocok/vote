@@ -15,7 +15,12 @@ block content
 			| &nbsp;
 			button(type="button",class="btn btn-danger reset") Reset stat
 			br
-			span(id="enabledTeams")
+			br
+			span Active teams:&nbsp;
+				span(id="enabledTeams")
+			br
+			span Active connections:&nbsp;
+				span(id="connections") 0
 
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-2.0.3.min.js')

@@ -15,6 +15,7 @@ exports.initApplication = function(socket)
 	socketHelper = new SocketHelper(socket);
 	user = new User(socket.id);
 	UserManager.addUser(user);
+    _notifyAdminConnectionChanged();
 
 	var emitParams = {
 		userId: user.id
@@ -128,6 +129,12 @@ function disconnect(socket)
         var user = UserManager.getUser(socket.id);
         UserManager.removeUser(user);
         console.log('User disconnected: ', user);
+        _notifyAdminConnectionChanged();
     };
 }
 
+function _notifyAdminConnectionChanged()
+{
+    // TODO esetleg csak adminokat kéne értesíteni? :)
+    socketHelper.emitToEverybody('admin.connectionUpdate', {userCount: UserManager.count()});
+}
