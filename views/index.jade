@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	.page-header
+		h1= title
+	.lead
+		form#app
+			ul
+				for team in teams
+					li(class="team #{team}")= team
+						| &nbsp;
+						select(name="rate")
+							for
+								each rate, i in ratings
+									option(value=rate,selected=i==4) #{rate}
+
+				else
+					li sorry, no teams!
+			button(type="submit",class="btn btn-primary") Submit
+
+	script(src='/socket.io/socket.io.js')
+	script(src='http://code.jquery.com/jquery-2.0.3.min.js')
+	script(src='/js/frontend.js')
+	script(src='/js/bootstrap.min.js')
