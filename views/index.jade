@@ -4,19 +4,22 @@ block content
 	.page-header
 		h1= title
 	.lead
-		#app
-			input(id="clientKey",type="text",maxlength="4",placeholder="Enter your code here")
-			button(id="login",type="submit",class="btn btn-primary") Login
+		#welcome(data-code=code)
+			|Wrong pass!
 
-		#app2(style="display:none")
+		#app(style="display:none")
 			ul
 				for team in teams
-					li(class="team #{team}",data-teamname=team)= team
-						| &nbsp;
-						select(name="rate_#{team}")
-							for
-								each rate, i in ratings
-									option(value=rate,selected=i==4) #{rate}
+					if team != activeUser.team
+						li(class="team #{team}",data-teamname=team)= team
+							| &nbsp;
+							each rate, i in ratings
+								div.radio
+									label
+										input(type="radio",name="rates_#{team}",value=rate)
+										| #{rate}
+					else
+						|<!--own team-->
 
 				else
 					li sorry, no teams!

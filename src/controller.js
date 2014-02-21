@@ -4,7 +4,7 @@ var config = require('../src/config').config;
 var User = require('./user').User;
 var fs = require('fs');
 
-var socketHelper, user;
+var socketHelper, user, votesEnabled = [];
 
 /**
  * @type {function}
@@ -22,6 +22,8 @@ exports.initApplication = function(socket)
 	socketHelper.emitToCurrentUser('handshake', emitParams);
 
     socket.on('admin.voteUpdate', adminVoteUpdate);
+    socket.on('admin.removeUpdate', adminRemoveVoteUpdate);
+    socket.on('admin.resetUpdate', adminResetVoteUpdate);
     socket.on('user.sendRate', userVoteSend);
     socket.on('user.login', userLogin);
 	//socket.on('disconnect', disconnect(socket));
@@ -29,9 +31,38 @@ exports.initApplication = function(socket)
 
 function adminVoteUpdate(params)
 {
+    var isAlreadyInTheList = votesEnabled.filter(function(item) {
+        return item == params.selectedTeam;
+    }).length;
+    if (!isAlreadyInTheList) {
+        votesEnabled.push(params.selectedTeam);
+    }
+    _adminPushUpdate(params.selectedTeam);
+}
+
+function adminRemoveVoteUpdate(params)
+{
+    votesEnabled = votesEnabled.filter(function(item) {
+        return item != params.selectedTeam;
+    });
+    _adminPushUpdate(null);
+}
+
+function adminResetVoteUpdate()
+{
+    votesEnabled = [];
+    _adminPushUpdate(null);
+}
+
+function _adminPushUpdate(selectedTeam)
+{
     var emitParams = {
-        team: params.selectedTeam
+        team: selectedTeam,
+        time: (new Date().getTime()),
+        enabledTeams: votesEnabled
     };
+    console.log('Admin vote update: ', emitParams);
+    console.log('Enabled teams: ', votesEnabled);
     socketHelper.emitToEverybody('vote.update', emitParams);
 }
 
@@ -45,7 +76,12 @@ function userLogin(params)
         // update user with code
         user.code = params.code;
         console.log('Login success with', params.code);
-        socketHelper.emitToCurrentUser('user.loginSuccess', null);
+        loadData(params.code, function(dataObj) {
+            var params = {
+                lastState: dataObj
+            };
+            socketHelper.emitToCurrentUser('user.loginSuccess', params);
+        });
     } else {
         user.code = null;
         console.log('Login failed with', params.code);
@@ -57,11 +93,29 @@ function userVoteSend(params)
 {
     console.log('User', user);
     console.log('Data:', params.data);
-    fs.writeFile("/tmp/" + user.code + ".json", params.data, function(err) {
+    saveData(user.code, params.data);
+}
+
+function saveData(code, data)
+{
+    fs.writeFile("/tmp/" + code + ".json", data, function(err) {
         if(err) {
             console.log(err);
         } else {
             console.log("The file was saved!");
+        }
+    });
+}
+
+function loadData(code, callback)
+{
+    fs.readFile( '/tmp/' + code + '.json', function(err, data) {
+        console.log('Load file: ', data.toString());
+        var d = data.toString();
+        if (d) {
+            callback(JSON.parse(d));
+        } else {
+            callback(null);
         }
     });
 }

@@ -1,4 +1,3 @@
-var url = require('url');
 var params = require('../src/config').config;
 
 /*
@@ -14,8 +13,10 @@ exports.index = function(request, response)
 	response.cookie('userId', userId, {maxAge: 900000, httpOnly: true});
 	//console.log(userId);
 	*/
-    var urlParams = url.parse(request.url, true).query;
-    params.code = urlParams.code||null;
+    params.code = request.params.id;
+    params.activeUser = params.users.filter(function(user) {
+        return user.code == params.code;
+    })[0];
 	response.render('index', params);
 };
 

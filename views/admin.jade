@@ -5,11 +5,17 @@ block content
 		h1= title
 	.lead
 		#app
-			select(id="teamSelector")
+			select(id="teamSelector",class="form-control")
 				each team, i in teams
 					option(value=team) #{team}
-
-			button(type="button",class="btn btn-primary") Set team LIVE
+			| &nbsp;
+			button(type="button",class="btn btn-primary golive") Set team LIVE
+			| &nbsp;
+			button(type="button",class="btn btn-warning offair") Set team OFFAIR
+			| &nbsp;
+			button(type="button",class="btn btn-danger reset") Reset stat
+			br
+			span(id="enabledTeams")
 
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-2.0.3.min.js')

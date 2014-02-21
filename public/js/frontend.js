@@ -11,8 +11,17 @@ var Vote = new (function Voter()
     self.handshake = function(response)
     {
         user.id = response.userId;
-        //TODO NEM TUDOM ÁTADNI!!! user.code = response.code;
-        //console.log('Handshake', response.userId);
+    };
+
+    self.autoLogin = function()
+    {
+        var userCode = $('#welcome').data('code');
+        if (userCode) {
+            var emitParams = {
+                code: userCode
+            };
+            socket.emit('user.login', emitParams);
+        }
     };
 
     /**
@@ -20,8 +29,10 @@ var Vote = new (function Voter()
      */
     self.loginSuccess = function(response)
     {
-        $('#app').hide();
-        $('#app2').show();
+        $('#welcome').hide();
+        $('#app').show();
+        console.log('Login success', response);
+        applyValuesOnForm(response.lastState);
     };
 
     /**
@@ -32,17 +43,29 @@ var Vote = new (function Voter()
         console.error('Hibás kód!');
     };
 
+    var applyValuesOnForm = function(values)
+    {
+        var i;
+        for (i in values) {
+            var item = values[i];
+            var teamName = item.name.replace("rates_", "");
+            $('.' + teamName + ' input[value=' + item.value + ']').attr('checked', true);
+        }
+    };
+
 	/**
 	 * @param {object} response
 	 */
 	self.update = function(response)
 	{
-        if (response.team) {
-            console.log('Update arrived', response);
-            var teams = $('.team');
-            teams.removeClass('active');
-            teams.filter('.' + response.team).addClass('active');
+        var teams = $('.team');
+        teams.removeClass('active');
+        console.log('Update arrived', response.enabledTeams);
+        var i;
+        for (i in response.enabledTeams) {
+            teams.filter('.' + response.enabledTeams[i]).addClass('active');
         }
+
 	};
 
     // TODO remove this
@@ -55,20 +78,15 @@ socket.on('user.loginSuccess', Vote.loginSuccess);
 socket.on('user.loginFailed', Vote.loginFailed);
 
 $(function() {
-    $('#login').click(function() {
-        var params = {
-            code: $('#clientKey').val()
-        };
-        console.log('Login with ', params);
-        socket.emit('user.login', params);
-    });
+    Vote.autoLogin();
 
-    $('#app2').find('button').click(function()
+    $('#app').find('button').click(function()
     {
-        var data = $('#app2').find('select').serialize() + '&time=' + (new Date().getTime());
+        var formValues = $('#app').find('input[type="radio"]').serializeArray();
+        var jsonData = JSON.stringify(formValues);
         var params = {
             user: user,
-            data: data
+            data: jsonData
         };
         console.log('Sending rate', params);
         socket.emit('user.sendRate', params);
