@@ -26,7 +26,7 @@ exports.initApplication = function(socket)
     socket.on('admin.resetUpdate', adminResetVoteUpdate);
     socket.on('user.sendRate', userVoteSend);
     socket.on('user.login', userLogin);
-	//socket.on('disconnect', disconnect(socket));
+	socket.on('disconnect', disconnect(socket));
 };
 
 function adminVoteUpdate(params)
@@ -120,3 +120,14 @@ function loadData(code, callback)
         }
     });
 }
+
+function disconnect(socket)
+{
+    return function()
+    {
+        var user = UserManager.getUser(socket.id);
+        UserManager.removeUser(user);
+        console.log('User disconnected: ', user);
+    };
+}
+

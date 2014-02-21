@@ -6,15 +6,6 @@
 exports.User = function(socketId)
 {
 	this.id = socketId;
-	this.room = null;
-
-	/**
-	 * @param {Room|string} room
-	 */
-	this.updateWithRoom = function(room)
-	{
-		this.room = room.name||room;
-	};
-
+	this.code = null;
 	return this;
 };
