@@ -32,16 +32,20 @@ var Vote = new (function Voter()
     {
         $('#welcome').hide();
         $('#app').show();
-        console.log('Login success', response);
+        //console.log('Login success', response);
         applyValuesOnForm(response.lastState);
     };
 
     /**
      * @param {object} response
      */
-    self.loginFailed = function(response)
+    self.loginFailed = function()
     {
-        console.error('Hibás kód!');
+       if (console && console.error) {
+           console.error('Hibás kód!');
+       } else {
+           alert('Wrong pass!');
+       }
     };
 
     var applyValuesOnForm = function(values)
@@ -61,7 +65,7 @@ var Vote = new (function Voter()
 	{
         var teams = $('.team');
         teams.removeClass('active');
-        console.log('Update arrived', response.enabledTeams);
+        //console.log('Update arrived', response.enabledTeams);
         var i;
         for (i in response.enabledTeams) {
             teams.filter('.' + response.enabledTeams[i]).addClass('active');
@@ -89,7 +93,7 @@ $(function() {
             user: user,
             data: jsonData
         };
-        console.log('Sending rate', params);
+        //console.log('Sending rate', params);
         socket.emit('user.sendRate', params);
     });
 });
