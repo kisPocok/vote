@@ -4,12 +4,16 @@ block content
 	.page-header
 		h1= title
 	.lead
-		form#app
+		#app
+			input(id="clientKey",type="text",maxlength="4",placeholder="Enter your code here")
+			button(id="login",type="submit",class="btn btn-primary") Login
+
+		#app2(style="display:none")
 			ul
 				for team in teams
-					li(class="team #{team}")= team
+					li(class="team #{team}",data-teamname=team)= team
 						| &nbsp;
-						select(name="rate")
+						select(name="rate_#{team}")
 							for
 								each rate, i in ratings
 									option(value=rate,selected=i==4) #{rate}
