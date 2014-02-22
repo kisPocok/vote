@@ -31,14 +31,8 @@ var Vote = new (function Voter()
     {
         $('#welcome').hide();
         $('#app').show();
-        console.log('Login success', response);
+        //console.log('Login success', response);
         self.update(response);
-        /*
-        var i;
-        for (i in response.votesEnabled) {
-            $('.' + response.votesEnabled[i]).addClass('active');
-        }
-        */
         applyValuesOnForm(response.lastState);
     };
 
@@ -87,7 +81,7 @@ var Vote = new (function Voter()
 	{
         var teams = $('.team');
         teams.removeClass('active');
-        console.log('Update arrived', response.enabledTeams);
+        //console.log('Update arrived', response.enabledTeams);
         var i;
         for (i in response.enabledTeams) {
             teams.filter('.' + response.enabledTeams[i]).addClass('active');
@@ -108,8 +102,14 @@ var Vote = new (function Voter()
             };
             _setVisibilityToVote(teamName, $('.' + teamName + ' input:radio:checked').val());
 
-            console.log('Sending rate', params);
+            //console.log('Sending rate', params);
             socket.emit('user.sendRate', params);
+        });
+        $('#app').find('label').click(function()
+        {
+            var li = $(this).parent('li');
+            li.parent('ul').find('.preactive').removeClass('preactive');
+            li.addClass('preactive');
         });
     };
 

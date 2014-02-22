@@ -18,7 +18,7 @@ exports.config = {
         'nyitmak':      {name: 'nyitmákhívó', boss: 'Bieber Norbi', appName: 'Live Alert'}
     },
     users: [
-        {code: 'aaaa', email: 'david@ustream.tv', team: 'admin', admin: true},
+        {code: 'lofasz', email: 'david@ustream.tv', team: 'admin', admin: true},
         {code: 'OEVnLO', email: 'koszti.lajos@ustream.tv', team: 'fruitloops'},
         {code: 'BhZVn9', email: 'vachter.attila@ustream.tv', team: 'fruitloops'},
         {code: '1I2E7k', email: 'sulik.szabolcs@ustream.tv', team: 'fruitloops'},
