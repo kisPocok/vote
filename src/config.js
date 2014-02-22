@@ -3,15 +3,21 @@ exports.config = {
     title: 'Vote(r)',
     titleAdmin: 'Vote(r) Admin',
     ratings: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    teams: ['alma', 'barack', 'korte'],
+    teams: ['ateam', 'eduteam', 'fruitloops', 'fux', 'ignore', 'macgyver', 'pumasimi', 'redduck', 'screamo'],
     teamNames: {
-        'alma':   'Alma csapat',
-        'barack': 'Barackos csapat',
-        'korte':  'Körték!'
+        'ateam': 'A Team',
+        'eduteam': 'Eduteam',
+        'fruitloops': 'Fruit Loops',
+        'fux': 'Fux',
+        'ignore': 'Ignore',
+        'macgyver': 'Mac Gyver',
+        'pumasimi': 'Puma Simogató Trollok',
+        'redduck': 'Red Duck',
+        'screamo': 'Screamo'
     },
     users: [
-        {code: 'aaaa', team: 'alma', admin: true},
-        {code: 'bbbb', team: 'barack'},
-        {code: '1234', team: 'korte'}
+        {code: 'OEVnLO22RLGN6', email: 'koszti.lajos@ustream.tv', team: 'fruitloops'},
+        {code: 'BhZVn91BqfXrc', email: 'vachter.attila@ustream.tv', team: 'fruitloops'},
+        {code: '1I2E7kgl9BBqQ', email: 'sulik.szabolcs@ustream.tv', team: 'fruitloops'}
     ]
 };
