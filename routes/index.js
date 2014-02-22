@@ -6,7 +6,7 @@ exports.index = function(request, response)
     params.activeUser = params.users.filter(function(user) {
         return user.code == params.code;
     })[0]||{};
-    params.port = process.env.PORT;
+    params.socketPort = process.env.PORT;
 	response.render('index', params);
 };
 
