@@ -113,7 +113,7 @@ function userVoteSend(params)
 
 function saveData(code, data)
 {
-    fs.writeFile("/tmp/" + code + ".json", data, function(err) {
+    fs.writeFile("/tmp/vote/" + code + ".json", data, function(err) {
         if(err) {
             console.log(err);
         } else {
@@ -124,7 +124,7 @@ function saveData(code, data)
 
 function loadData(code, callback)
 {
-    fs.readFile( '/tmp/' + code + '.json', function(err, data) {
+    fs.readFile( '/tmp/vote/' + code + '.json', function(err, data) {
         var d = data ? data.toString() : undefined;
         console.log('Loaded data: ', d);
         if (d) {

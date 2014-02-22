@@ -29,7 +29,7 @@ if ('development' === app.get('env') || process.env.DEV == 1) {
 var server = http.createServer(app).listen(app.get('port'));
 GLOBAL.io = require('socket.io').listen(server);
 io.set('log level', 1);
-app.get('/', routes.index);
+//app.get('/', routes.index);
 app.get('/code/:id', routes.index);
 app.get('/admin/:id', routes.admin);
 
