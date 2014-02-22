@@ -4,26 +4,33 @@ block content
 	.page-header
 		h1= title
 	.lead
-		#welcome(data-code=code,data-port=socketPort)
+		#welcome(data-code=code, data-port=socketPort)
 			|Wrong pass!!
 
 		#app(style="display:none")
 			ul
 				for team in teams
 					if team != activeUser.team
-						li(class="team #{team}",data-teamname=team)= teamNames[team]
+						li(class="team voter #{team}", data-teamname=team)
+							h1 CÍM 1
+							h2= teamNames[team]
+							h3 CÍM 3
 							| &nbsp;
-							each rate, i in ratings
-								div.radio
-									label
-										input(type="radio",name="rates_#{team}",value=rate)
-										| #{rate}
+							div.voterBottom
+								p Értékeld a csapatot!
+								ul(class="numbers clearAfter")
+									each rate, i in ratings
+										li.radio
+											label
+												input(type="radio", name="rates_#{team}", value=rate)
+												| #{rate}
 					else
 						|<!--own team-->
 
 				else
 					li sorry, no teams!
-			button(type="submit",class="btn btn-primary") Submit
+			//button(type="submit",class="btn btn-primary") Submit
+			a(class="voterAction", href="#") Szavazat elküldése
 
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-2.0.3.min.js')

@@ -11,7 +11,7 @@ exports.index = function(request, response)
 exports.admin = function(request, response)
 {
     var user = _getActiveUser(request.params.id);
-    if (!user.admin) {
+    if (!user || !user.admin) {
         return false;
     }
     params.code = request.params.id;

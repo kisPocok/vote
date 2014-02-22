@@ -48,3 +48,158 @@ li.active {
 	display: inline;
 }
 
+
+/* BAZSI CSINÁLTA SZERINTEM BIZTOS JÓ LESZ!
+-------------------------------------------------- */
+
+body {
+	width: 100%;
+	max-width: 720px;
+	margin: 0 auto;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #cecece;
+}
+
+p { margin: 0 }
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: #da0303;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.clearAfter:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+header {
+	padding: .5rem 0;
+	background-color: #feb021;
+	font-size: 1.8rem;
+	color: #fff;
+	text-align: center;
+}
+
+.voter {
+	position: relative;
+	height: 30rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.voter.disabled {
+	background-color: rgba(255, 255, 255, .3);
+}
+
+.voter::after {
+	width: 100%;
+	content: "";
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: -1;
+}
+
+.voter_ignore::after {
+	background: transparent url(../img/ignore.png) center center no-repeat;
+	background-size: cover;
+}
+
+.voter_2::after {
+	background: transparent url(../img/ateam.png) center center no-repeat;
+	background-size: cover;
+}
+
+.voter_3::after {
+	background: transparent url(../img/redduck.png) center center no-repeat;
+	background-size: cover;
+}
+
+.voterBottom {
+	position: absolute;
+	bottom: 2rem;
+}
+
+h1, h2, h3, p {
+	margin: 0 0 .3rem;
+	font-weight: normal;
+	color: #fff;
+}
+
+h3 {
+	text-transform: uppercase;
+}
+
+p {
+	margin: 3rem 0 1rem;
+}
+
+.numbers {
+	margin-bottom: 1rem;
+}
+
+.numbers li {
+	float: left;
+	margin: 0 .625rem .5rem 0;
+	border: 1px solid #fff;
+	font-size: 1rem;
+	line-height: 2.625rem;
+	text-align: center;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.numbers .active {
+	background-color: #2ecc71;
+}
+
+.numbers input {
+	display: none;
+}
+
+.numbers label {
+	display: block;
+	width: 2.625rem;
+	height: 2.625rem;
+	cursor: pointer;
+}
+
+.voterAction,
+.voterAction:hover {
+	display: inline-block;
+	padding: 1rem .5rem;
+	border: 1px solid #fff;
+	background-color: #feb021;
+	color: #fff;
+	line-height: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.voterAction.voted {
+	padding: .6rem .5rem;
+	background-color: transparent;
+}
+
+.voterAction.voted .numVoted {
+	display: inline-block;
+	padding: .4rem .6rem;
+	margin-right: .6rem;
+	background-color: #2ecc71;
+}
