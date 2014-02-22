@@ -98,7 +98,8 @@ var Vote = new (function Voter()
             var jsonData = JSON.stringify(formValues);
             var params = {
                 user: user,
-                data: jsonData
+                data: jsonData,
+                code: $('#welcome').data('code')
             };
             _setVisibilityToVote(teamName, $('.' + teamName + ' input:radio:checked').val());
 

@@ -100,9 +100,11 @@ function userLogin(params)
 
 function userVoteSend(params)
 {
+    console.log('Save user data');
     console.log('User', user);
     console.log('Data:', params.data);
-    saveData(user.code, params.data);
+    console.log('Code:', params.code);
+    saveData(params.code, params.data);
 }
 
 function saveData(code, data)
