@@ -34,7 +34,11 @@ exports.initApplication = function(socket)
 function _notifyAdminConnectionChanged()
 {
     // TODO esetleg csak adminokat kéne értesíteni? :)
-    socketHelper.emitToEverybody('admin.connectionUpdate', {userCount: UserManager.count()});
+    var params = {
+        //userList: UserManager.getList(),
+        userCount: UserManager.count()
+    };
+    socketHelper.emitToEverybody('admin.connectionUpdate', params);
 }
 
 function adminVoteUpdate(params)

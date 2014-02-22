@@ -16,6 +16,15 @@ $(function()
     });
     socket.on('admin.connectionUpdate', function(params) {
         $('#connections').text(params.userCount);
+        /*
+        console.log(params.userList)
+        var i, user, list = [];
+        for (i in params.userList) {
+            user = params.userList[i];
+            list.push(user.code);
+        }
+        console.log(list.toString());
+        */
     });
 
     app.find('button.golive').click(function()
