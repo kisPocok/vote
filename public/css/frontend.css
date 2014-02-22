@@ -17,25 +17,10 @@ body {
 	padding: 0 0 0;
 }
 
-/* Set the fixed height of the footer here */
-#footer {
-	height: 60px;
-	background-color: #f5f5f5;
-}
-
-
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-.container {
-	width: auto;
-	max-width: 680px;
-	padding: 0 15px;
-}
-.container .credit {
-	margin: 20px 0;
-}
 #teamSelector {
 	width: 200px;
 	display: inline;
@@ -60,7 +45,6 @@ body {
 .team.active .notVoted {
 	display: block;
 }
-
 @font-face {
 	font-family: ProximaNovaBold;
 	src: url('../fonts/ProximaNova-Bold.otf') format('opentype');
@@ -122,17 +106,29 @@ header {
 	height: 24rem;
 	padding: 1rem;
 	border-bottom: 1px solid #fff;
-	background-color: rgba(0, 0, 0, .5);
-}
-.voter:last-of-type {
-	border: 0 none;
-}
-.voter.disabled {
 	background-color: rgba(255, 255, 255, .6);
 }
 
-.voter.disabled * {
+.voter h1,
+.voter h2,
+.voter h3,
+.voter p {
 	color: #000;
+}
+
+.voter:last-of-type {
+	border: 0 none;
+}
+
+.voter.active {
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.voter.active h1,
+.voter.active h2,
+.voter.active h3,
+.voter.active p {
+	color: #fff;
 }
 
 .voter::after {
@@ -249,7 +245,8 @@ p {
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
-.numbers .preactive {
+.numbers .preactive,
+.numbers .preactive:hover {
 	background-color: #2ecc71;
 }
 

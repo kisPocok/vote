@@ -19,6 +19,10 @@ exports.config = {
     },
     users: [
         {code: 'lofasz', email: 'david@ustream.tv', team: 'admin', admin: true},
+        {code: 'keresk', email: '', team: 'admin', admin: true},
+        {code: 'kolinz', email: '', team: 'admin', admin: true},
+        {code: 'tzetze', email: '', team: 'admin', admin: true},
+        {code: 'sdavid', email: '', team: 'admin', admin: true},
         {code: 'OEVnLO', email: 'koszti.lajos@ustream.tv', team: 'fruitloops'},
         {code: 'BhZVn9', email: 'vachter.attila@ustream.tv', team: 'fruitloops'},
         {code: '1I2E7k', email: 'sulik.szabolcs@ustream.tv', team: 'fruitloops'},
