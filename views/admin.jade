@@ -7,7 +7,7 @@ block content
 		#app(data-port=socketPort)
 			select(id="teamSelector",class="form-control")
 				each team, i in teams
-					option(value=team) #{teamNames[team]}
+					option(value=team) #{teamNames[team].name}
 			| &nbsp;
 			button(type="button",class="btn btn-primary golive") Set team LIVE
 			| &nbsp;

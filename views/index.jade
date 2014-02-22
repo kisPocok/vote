@@ -12,9 +12,9 @@ block content
 				for team in teams
 					if team != activeUser.team
 						li(class="team voter #{team}", data-teamname=team)
-							h1 CÍM 1
-							h2= teamNames[team]
-							h3 CÍM 3
+							h1= teamNames[team].boss
+							h2= teamNames[team].name
+							h3= teamNames[team].appName
 							| &nbsp;
 							div.voterBottom
 								p Értékeld a csapatot!
@@ -24,13 +24,12 @@ block content
 											label
 												input(type="radio", name="rates_#{team}", value=rate)
 												| #{rate}
+								//button(type="submit",class="btn btn-primary") Submit
+								a(class="voterAction", href="#", data-team=team) Szavazat elküldése
 					else
-						|<!--own team-->
-
+						|<!--own team skipped-->
 				else
 					li sorry, no teams!
-			//button(type="submit",class="btn btn-primary") Submit
-			a(class="voterAction", href="#") Szavazat elküldése
 
 	script(src='/socket.io/socket.io.js')
 	script(src='http://code.jquery.com/jquery-2.0.3.min.js')

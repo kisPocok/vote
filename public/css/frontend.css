@@ -115,18 +115,18 @@ header {
 	z-index: -1;
 }
 
-.voter_ignore::after {
-	background: transparent url(../img/ignore.png) center center no-repeat;
+.ignore::after {
+	background: transparent url(../img/ignore.jpg) center center no-repeat;
 	background-size: cover;
 }
 
-.voter_2::after {
-	background: transparent url(../img/ateam.png) center center no-repeat;
+.ateam::after {
+	background: transparent url(../img/ateam.jpg) center center no-repeat;
 	background-size: cover;
 }
 
-.voter_3::after {
-	background: transparent url(../img/redduck.png) center center no-repeat;
+.redduck::after {
+	background: transparent url(../img/redduck.jpg) center center no-repeat;
 	background-size: cover;
 }
 

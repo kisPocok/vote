@@ -88,9 +88,10 @@ $(function()
 
     Vote.autoLogin();
 
-    $('#app').find('button').click(function()
+    $('#app').find('.voterAction').click(function()
     {
-        var formValues = $('#app').find('input[type="radio"]').serializeArray();
+        var teamName = $(this).data('team');
+        var formValues = $('#app .' + teamName).find('input[type="radio"]').serializeArray();
         var jsonData = JSON.stringify(formValues);
         var params = {
             user: user,
