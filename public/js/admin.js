@@ -7,7 +7,6 @@ $(function()
     var host = window.location.protocol + '//' + window.location.hostname;
     var socket = io.connect(host + ':' + port);
 
-
     // after load the site, update the list
     socket.emit('admin.voteUpdate', {});
     socket.on('vote.update', function(params) {

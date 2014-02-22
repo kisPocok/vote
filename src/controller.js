@@ -42,7 +42,6 @@ function adminVoteUpdate(params)
     var isAlreadyInTheList = votesEnabled.filter(function(item) {
         return item == params.selectedTeam;
     }).length;
-    console.log('isAlreadyInTheList', isAlreadyInTheList)
     if (!isAlreadyInTheList && params.selectedTeam) {
         votesEnabled.push(params.selectedTeam);
     }

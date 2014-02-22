@@ -31,7 +31,7 @@ GLOBAL.io = require('socket.io').listen(server);
 io.set('log level', 1);
 app.get('/', routes.index);
 app.get('/code/:id', routes.index);
-app.get('/admin', routes.admin);
+app.get('/admin/:id', routes.admin);
 
 /**
  * - Aye-Aye, Captain. Course laid in.

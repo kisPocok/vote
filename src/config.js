@@ -10,7 +10,7 @@ exports.config = {
         'korte':  'Körték!'
     },
     users: [
-        {code: 'aaaa', team: 'alma'},
+        {code: 'aaaa', team: 'alma', admin: true},
         {code: 'bbbb', team: 'barack'},
         {code: '1234', team: 'korte'}
     ]
