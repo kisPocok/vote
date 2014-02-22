@@ -1,12 +1,24 @@
 
-var host = window.location.protocol + '//' + window.location.hostname;
-var socket = io.connect(host + ':3000');
+var socket;
 $(function()
 {
+    var app = $('#app');
+    var port = app.data('port') || 3000;
+    var host = window.location.protocol + '//' + window.location.hostname;
+    var socket = io.connect(host + ':' + port);
+
+
     // after load the site, update the list
     socket.emit('admin.voteUpdate', {});
+    socket.on('vote.update', function(params) {
+        var teams = params.enabledTeams;
+        teams.sort();
+        $('#enabledTeams').text(teams.toString());
+    });
+    socket.on('admin.connectionUpdate', function(params) {
+        $('#connections').text(params.userCount);
+    });
 
-    var app = $('#app');
     app.find('button.golive').click(function()
     {
         var team = $('#teamSelector').val();
@@ -32,15 +44,4 @@ $(function()
         console.log('Reset');
         socket.emit('admin.resetUpdate');
     });
-});
-
-socket.on('vote.update', function(params) {
-    var teams = params.enabledTeams;
-    teams.sort();
-    $('#enabledTeams').text(teams.toString());
-});
-
-
-socket.on('admin.connectionUpdate', function(params) {
-    $('#connections').text(params.userCount);
 });

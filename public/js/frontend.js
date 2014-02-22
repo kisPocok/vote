@@ -1,7 +1,6 @@
 
 var user = {};
-var host = window.location.protocol + '//' + window.location.hostname;
-var socket = io.connect(host + ':3000');
+var socket;
 var Vote = new (function Voter()
 {
 	var self = this;
@@ -77,12 +76,16 @@ var Vote = new (function Voter()
     return self;
 });
 
-socket.on('handshake', Vote.handshake);
-socket.on('vote.update', Vote.update);
-socket.on('user.loginSuccess', Vote.loginSuccess);
-socket.on('user.loginFailed', Vote.loginFailed);
+$(function()
+{
+    var port = $('#welcome').data('port') || 3000;
+    var host = window.location.protocol + '//' + window.location.hostname;
+    socket = io.connect(host + ':' + port);
+    socket.on('handshake', Vote.handshake);
+    socket.on('vote.update', Vote.update);
+    socket.on('user.loginSuccess', Vote.loginSuccess);
+    socket.on('user.loginFailed', Vote.loginFailed);
 
-$(function() {
     Vote.autoLogin();
 
     $('#app').find('button').click(function()
