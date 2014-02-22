@@ -28,10 +28,6 @@ if ('development' === app.get('env') || process.env.DEV == 1) {
 
 var server = http.createServer(app).listen(app.get('port'));
 GLOBAL.io = require('socket.io').listen(server);
-io.configure(function () {
-    io.set("transports", ["xhr-polling"]);
-    io.set("polling duration", 10);
-});
 io.set('log level', 1);
 app.get('/', routes.index);
 app.get('/code/:id', routes.index);

@@ -12,7 +12,7 @@ exports.index = function(request, response)
 
 exports.admin = function(request, response)
 {
-    params.title = 'Vote(r) ADMIN';
+    params.titleAdmin = 'Vote(r) Admin*';
     params.socketPort = process.env.PORT || 3000;
     response.render('admin', params);
 };

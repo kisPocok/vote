@@ -27,8 +27,15 @@ exports.initApplication = function(socket)
     socket.on('admin.resetUpdate', adminResetVoteUpdate);
     socket.on('user.sendRate', userVoteSend);
     socket.on('user.login', userLogin);
-	socket.on('disconnect', disconnect(socket));
+	socket.on('disconnect', disconnectUser(user));
 };
+
+
+function _notifyAdminConnectionChanged()
+{
+    // TODO esetleg csak adminokat kéne értesíteni? :)
+    socketHelper.emitToEverybody('admin.connectionUpdate', {userCount: UserManager.count()});
+}
 
 function adminVoteUpdate(params)
 {
@@ -122,19 +129,13 @@ function loadData(code, callback)
     });
 }
 
-function disconnect(socket)
+function disconnectUser(user)
 {
     return function()
     {
-        var user = UserManager.getUser(socket.id);
-        UserManager.removeUser(user);
         console.log('User disconnected: ', user);
+        //console.log('Users ', UserManager.getList());
+        UserManager.removeUser(user);
         _notifyAdminConnectionChanged();
     };
-}
-
-function _notifyAdminConnectionChanged()
-{
-    // TODO esetleg csak adminokat kéne értesíteni? :)
-    socketHelper.emitToEverybody('admin.connectionUpdate', {userCount: UserManager.count()});
 }
