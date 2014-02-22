@@ -15,7 +15,7 @@ exports.config = {
         'redduck':      {name: 'Red Duck', boss: 'Radnóczi Gergő', appName: 'Whereabouts'},
         'screamo':      {name: 'Screamo', boss: 'Schmidt Gergely', appName: 'FoodStream 2.'},
         'cod':          {name: 'Call of Duty', boss: 'Csergő Bálint', appName: 'OpenDuty'},
-        'nyitmak':      {name: 'nyitmákhívó', boss: 'Bieber Norbi', appName: 'Live Alert'}
+        'nyitmak':      {name: 'Mitnymákhívó', boss: 'Bieber Norbi', appName: 'Live Alert'}
     },
     users: [
         {code: 'lofasz', email: 'david@ustream.tv', team: 'admin', admin: true},
