@@ -124,7 +124,9 @@ header {
 	border-bottom: 1px solid #fff;
 	background-color: rgba(0, 0, 0, .5);
 }
-
+.voter:last-of-type {
+	border: 0 none;
+}
 .voter.disabled {
 	background-color: rgba(255, 255, 255, .6);
 }
