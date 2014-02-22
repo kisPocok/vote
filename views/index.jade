@@ -1,8 +1,8 @@
 extends layout
 
 block content
-	.page-header
-		h1= title
+	header
+		b= title
 	.lead
 		#welcome(data-code=code, data-port=socketPort)
 			|Wrong pass!!
@@ -17,15 +17,21 @@ block content
 							h3= teamNames[team].appName
 							| &nbsp;
 							div.voterBottom
-								p Értékeld a csapatot!
-								ul(class="numbers clearAfter")
-									each rate, i in ratings
-										li.radio
-											label
-												input(type="radio", name="rates_#{team}", value=rate)
-												| #{rate}
-								//button(type="submit",class="btn btn-primary") Submit
-								a(class="voterAction", href="#", data-team=team) Szavazat elküldése
+								span(class="voterAction cantVote wait")
+									span HAMAROSAN SZAVAZHATSZ RÁJUK
+								span(class="voterAction voted", style="display:none")
+									b(class="numVoted") ?
+									span ponttal értékelted őket
+								span(class="notVoted")
+									p Értékeld a csapatot!
+									ul(class="numbers clearAfter")
+										each rate, i in ratings
+											li.radio
+												label
+													input(type="radio", name="rates_#{team}", value=rate)
+													| #{rate}
+									//button(type="submit",class="btn btn-primary") Submit
+									a(class="voterAction submitRate", href="#", data-team=team) Szavazat elküldése
 					else
 						|<!--own team skipped-->
 				else

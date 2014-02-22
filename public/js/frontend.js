@@ -31,7 +31,14 @@ var Vote = new (function Voter()
     {
         $('#welcome').hide();
         $('#app').show();
-        //console.log('Login success', response);
+        console.log('Login success', response);
+        self.update(response);
+        /*
+        var i;
+        for (i in response.votesEnabled) {
+            $('.' + response.votesEnabled[i]).addClass('active');
+        }
+        */
         applyValuesOnForm(response.lastState);
     };
 
@@ -54,6 +61,22 @@ var Vote = new (function Voter()
             var item = values[i];
             var teamName = item.name.replace("rates_", "");
             $('.' + teamName + ' input[value=' + item.value + ']').attr('checked', true);
+            _setVisibilityToVote(teamName, item.value);
+        }
+    };
+
+    var _setVisibilityToVote = function(teamName, point)
+    {
+        if (point) {
+            var voteRow = $('.' + teamName + ' .voterBottom');
+            var voted = voteRow.find('.voted');
+            var notVoted = voteRow.find('.notVoted');
+            var cantVoted = voteRow.find('.cantVoted');
+            voted.find('.numVoted').text(point);
+            voted.show();
+            notVoted.hide();
+            cantVoted.hide();
+            voteRow.parent('li').addClass('active');
         }
     };
 
@@ -64,7 +87,7 @@ var Vote = new (function Voter()
 	{
         var teams = $('.team');
         teams.removeClass('active');
-        //console.log('Update arrived', response.enabledTeams);
+        console.log('Update arrived', response.enabledTeams);
         var i;
         for (i in response.enabledTeams) {
             teams.filter('.' + response.enabledTeams[i]).addClass('active');
@@ -72,7 +95,24 @@ var Vote = new (function Voter()
 
 	};
 
-    // TODO remove this
+    self.initScreen = function()
+    {
+        $('#app').find('.voterAction.submitRate').click(function()
+        {
+            var teamName = $(this).data('team');
+            var formValues = $('#app').find('input[type="radio"]').serializeArray();
+            var jsonData = JSON.stringify(formValues);
+            var params = {
+                user: user,
+                data: jsonData
+            };
+            _setVisibilityToVote(teamName, $('.' + teamName + ' input:radio:checked').val());
+
+            console.log('Sending rate', params);
+            socket.emit('user.sendRate', params);
+        });
+    };
+
     return self;
 });
 
@@ -87,17 +127,5 @@ $(function()
     socket.on('user.loginFailed', Vote.loginFailed);
 
     Vote.autoLogin();
-
-    $('#app').find('.voterAction').click(function()
-    {
-        var teamName = $(this).data('team');
-        var formValues = $('#app .' + teamName).find('input[type="radio"]').serializeArray();
-        var jsonData = JSON.stringify(formValues);
-        var params = {
-            user: user,
-            data: jsonData
-        };
-        //console.log('Sending rate', params);
-        socket.emit('user.sendRate', params);
-    });
+    Vote.initScreen();
 });

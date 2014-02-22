@@ -1,7 +1,7 @@
 
 exports.config = {
-    title: 'Vote(r)',
-    titleAdmin: 'Vote(r) Admin',
+    title: 'Hackathon közönségszavazás',
+    titleAdmin: 'Hackathon közönségszavazás * Admin',
     ratings: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     teams: ['ateam', 'eduteam', 'fruitloops', 'fux', 'ignore', 'macgyver', 'pumasimi', 'redduck', 'screamo', 'cod', 'nyitmak'],
     teamNames: {

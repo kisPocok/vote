@@ -12,9 +12,9 @@ body {
 	min-height: 100%;
 	height: auto;
 	/* Negative indent footer by its height */
-	margin: 0 auto -60px;
+	margin: 0 auto 0 auto;
 	/* Pad bottom by footer height */
-	padding: 0 0 60px;
+	padding: 0 0 0;
 }
 
 /* Set the fixed height of the footer here */
@@ -36,13 +36,6 @@ body {
 .container .credit {
 	margin: 20px 0;
 }
-
-li {
-	background-color: #ccc;
-}
-li.active {
-	background-color: #fff;
-}
 #teamSelector {
 	width: 200px;
 	display: inline;
@@ -52,11 +45,42 @@ li.active {
 /* BAZSI CSINÁLTA SZERINTEM BIZTOS JÓ LESZ!
 -------------------------------------------------- */
 
+
+.team .cantVote {
+	display: block;
+}
+.team .voted,
+.team .notVoted {
+	display: none;
+}
+.team.active .cantVote {
+	display: none;
+}
+.team.active .voted,
+.team.active .notVoted {
+	display: block;
+}
+
+@font-face {
+	font-family: ProximaNovaBold;
+	src: url('../fonts/ProximaNova-Bold.otf') format('opentype');
+}
+
+@font-face {
+	font-family: ProximaNovaLight;
+	src: url('../fonts/ProximaNova-Light.otf') format('opentype');
+}
+
+@font-face {
+	font-family: ProximaNovaThin;
+	src: url('../fonts/ProximaNova-Thin.otf') format('opentype');
+}
+
 body {
 	width: 100%;
 	max-width: 720px;
 	margin: 0 auto;
-	font-family: 'Open Sans', sans-serif;
+	font-family: ProximaNovaLight, Arial;
 	background-color: #cecece;
 }
 
@@ -95,13 +119,18 @@ header {
 
 .voter {
 	position: relative;
-	height: 30rem;
+	height: 24rem;
 	padding: 1rem;
+	border-bottom: 1px solid #fff;
 	background-color: rgba(0, 0, 0, .5);
 }
 
 .voter.disabled {
-	background-color: rgba(255, 255, 255, .3);
+	background-color: rgba(255, 255, 255, .6);
+}
+
+.voter.disabled * {
+	color: #000;
 }
 
 .voter::after {
@@ -115,8 +144,33 @@ header {
 	z-index: -1;
 }
 
+.macgyver::after {
+	background: transparent url(../img/macgyver.jpg) center center no-repeat;
+	background-size: cover;
+}
+
 .ignore::after {
 	background: transparent url(../img/ignore.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.screamo::after {
+	background: transparent url(../img/screamo.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.cod::after {
+	background: transparent url(../img/cod.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.pumasimi::after {
+	background: transparent url(../img/pumasimi.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.fruitloops::after {
+	background: transparent url(../img/fruitloops.jpg) center center no-repeat;
 	background-size: cover;
 }
 
@@ -125,8 +179,23 @@ header {
 	background-size: cover;
 }
 
+.eduteam::after {
+	background: transparent url(../img/eduteam.jpg) center center no-repeat;
+	background-size: cover;
+}
+
 .redduck::after {
 	background: transparent url(../img/redduck.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.fux::after {
+	background: transparent url(../img/fux.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.nyitmak::after {
+	background: transparent url(../img/nyitmak.jpg) center center no-repeat;
 	background-size: cover;
 }
 
@@ -136,12 +205,22 @@ header {
 }
 
 h1, h2, h3, p {
-	margin: 0 0 .3rem;
+	margin: 0;
 	font-weight: normal;
 	color: #fff;
 }
 
+h1 {
+	margin-bottom: .1rem;
+}
+
+h2 {
+	margin-bottom: 1rem;
+}
+
 h3 {
+	font-family: ProximaNovaBold;
+	line-height: 1.2;
 	text-transform: uppercase;
 }
 
@@ -164,6 +243,10 @@ p {
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
+.numbers li:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
 .numbers .active {
 	background-color: #2ecc71;
 }
@@ -179,12 +262,12 @@ p {
 	cursor: pointer;
 }
 
-.voterAction,
-.voterAction:hover {
+.voterAction {
 	display: inline-block;
-	padding: 1rem .5rem;
+	padding: 1rem;
 	border: 1px solid #fff;
 	background-color: #feb021;
+	font-family: ProximaNovaBold;
 	color: #fff;
 	line-height: 1;
 	text-decoration: none;
@@ -192,8 +275,14 @@ p {
 	text-align: center;
 }
 
+a.voterAction:hover {
+	background-color: #feb444;
+	text-decoration: none;
+}
+
 .voterAction.voted {
 	padding: .6rem .5rem;
+	font-family: ProximaNovaLight;
 	background-color: transparent;
 }
 
@@ -202,4 +291,10 @@ p {
 	padding: .4rem .6rem;
 	margin-right: .6rem;
 	background-color: #2ecc71;
+}
+
+.voterAction.wait {
+	font-family: ProximaNovaLight;
+	background-color: rgba(0, 0, 0, .6);
+	color: #fff;
 }

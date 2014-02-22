@@ -86,7 +86,8 @@ function userLogin(params)
         console.log('Login success with', params.code);
         loadData(params.code, function(dataObj) {
             var params = {
-                lastState: dataObj
+                lastState: dataObj,
+                enabledTeams: votesEnabled
             };
             socketHelper.emitToCurrentUser('user.loginSuccess', params);
         });
